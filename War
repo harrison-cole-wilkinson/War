@@ -1,0 +1,75 @@
+from Deck import Deck as d
+from Player import Player as p
+
+deck = d()
+deck.shuffle()
+p1 = p("Cole", [], -1, 6)
+p2 = p("Dealer",[],-1,26)
+
+for i in range(0,26):
+    p1.add_to_hand(deck.get_Card())
+for i in range(26,52):
+    p2.add_to_hand(deck.get_Card())
+
+game_is_going = True
+while(game_is_going):
+    card = p1.get_next_card()
+
+    card2 = p2.get_next_card()
+
+    print(card.prettify() + " VS " + card2.prettify())
+
+    war_list = []
+    def war(p11,p22):
+        card1 = p11.get_next_card()
+        card11 = p11.get_next_card()
+        card22 = p22.get_next_card()
+        card222 = p22.get_next_card()
+        war_list.append(card1)
+        war_list.append(card11)
+        war_list.append(card22)
+        war_list.append(card222)
+        # print(card11.prettify() + " VS " + card222.prettify())
+        if card11.get_val() > card222.get_val():
+            for card3 in war_list:
+                print(card3.prettify())
+                p11.add_to_hand(card3)
+            p11.add_to_hand(card)
+            p11.add_to_hand(card2)
+            print("p1 wins!")
+        elif card11.get_val() == card222.get_val():
+            print("WAR, YET AGAIN")
+            war(p11,p22)
+        else:
+            for card3 in war_list:
+                print(card3.prettify())
+                p22.add_to_hand(card3)
+            p22.add_to_hand(card)
+            p22.add_to_hand(card2)
+            print("p2 wins!")
+    if card.get_val() > card2.get_val():
+        p1.add_to_hand(card)
+        p1.add_to_hand(card2)
+        print("p1 wins!")
+    elif card.get_val() == card2.get_val():
+        print("WAR")
+        war(p1,p2)
+
+
+    else:
+        p2.add_to_hand(card)
+        p2.add_to_hand(card2)
+        print("p2 wins!")
+
+    print(p1.get_hand_length()-(p1.count+1))
+    print(p2.get_hand_length()-(p2.count+1))
+
+    print(p1.get_nice_hand())
+    print(p2.get_nice_hand())
+
+    print(p1.count)
+    print(p2.count)
+
+
+    if(input("Keep Playing?\n")=='n'):
+        game_is_going = False
