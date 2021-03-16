@@ -1,0 +1,13 @@
+from Card import Card
+class WarCard(Card):
+    def get_val(self):
+        if "J" in self.get_face():
+            return 10
+        elif "G" in self.get_face():
+            return 12
+        elif "Q" in self.get_face():
+            return 11
+        elif "C" in self.get_face():
+            return 13
+        else:
+            return int(self.get_face())
