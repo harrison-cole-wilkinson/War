@@ -1,0 +1,14 @@
+from WarCard import WarCard as Card
+import random as r
+class Deck:
+    d=[]
+    count = -1
+    for face in Card.faces:
+        for suit in Card.suits:
+            d.append(Card(face,suit))
+
+    def shuffle(self):
+        r.shuffle(self.d)
+    def get_Card(self):
+        self.count+=1
+        return self.d[self.count]
