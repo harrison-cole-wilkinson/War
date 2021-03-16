@@ -1,0 +1,22 @@
+from WarCard import WarCard
+class Player:
+    def __init__(self,name,hand,count,score):
+        self.name = name
+        self.hand = hand
+        self.count = count
+        self.score = score
+
+    def get_Name(self):
+        return self.name
+    def add_to_hand(self,card):
+        self.hand.append(card)
+    def get_nice_hand(self):
+        h = []
+        for card in self.hand:
+            h.append(card.get_face() + ' of ' + card.get_suit())
+        return h
+    def get_next_card(self):
+        self.count +=1
+        return (self.hand[self.count])
+    def get_hand_length(self):
+        return len(self.hand)
